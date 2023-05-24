@@ -7,8 +7,7 @@ import { BackgroundImage, Center, Box } from "@mantine/core";
 function Todo() {
   const [todos, setTodos] = useState([]);
   const [currentTodo, setCurrentTodo] = useState("");
-  const [opened, { open, close }] = useDisclosure(false);
-  const [deleteIndex, setDeleteIndex] = useState(0);
+  const [deleteModalOpened, setDeleteModalOpened] = useState(false);
 
   const addTodo = async () => {
     if (currentTodo.trim() !== "") {
@@ -27,15 +26,18 @@ function Todo() {
         } else {
           const error = await response.json();
           console.error("Error:", error);
+          alert("Failed to add todo");
         }
       } catch (error) {
         console.error("Error:", error);
+        alert("An error occurred.");
       }
     }
   };
 
   const deleteTodo = async (index) => {
     const todoId = todos[index]._id;
+    setDeleteModalOpened(true);
 
     try {
       const response = await fetch(
@@ -92,12 +94,12 @@ function Todo() {
         gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
         style={{ marginBottom: "20px" }}
         onClick={() => {
-          open();
+          setDeleteModalOpened(true);
         }}
       >
         Open
       </Button>
-      <Box maxWidth={500} mx="auto">
+      <Box mx="auto">
         <BackgroundImage
           src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80"
           radius="xs"
@@ -152,10 +154,14 @@ function Todo() {
           </li>
         ))}
       </ul>
-      <Modal opened={opened} onClose={close} title="Modal">
-        <Group position="center">
+      <Modal
+        opened={deleteModalOpened}
+        onClose={() => setDeleteModalOpened(false)}
+        title="Modal"
+      >
+        <Group>
           <Button onClick={() => deleteTodo(deleteIndex)}>Delete</Button>
-          <Button onClick={close}>Cancel</Button>
+          <Button onClick={() => setDeleteModalOpened(false)}>Cancel</Button>
         </Group>
       </Modal>
     </div>

@@ -1,11 +1,6 @@
 import { connectToDatabase } from "../../mongo";
 
 export default async function handler(req, res) {
-  /*const client = await connectToDatabase();
-  const db = client.db("My_first_db");
-  const todos = db.collection("Todos");
-  chatgpt says to move these declarations under, why?*/
-
   const { title } = req.body;
 
   if (!title) {
@@ -23,6 +18,7 @@ export default async function handler(req, res) {
 
     res.status(200).json(result.ops[0]);
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).json({ error: "Fail" });
   }
 }
