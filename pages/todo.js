@@ -9,6 +9,10 @@ function Todo() {
   const [currentTodo, setCurrentTodo] = useState("");
   const [deleteModalOpened, setDeleteModalOpened] = useState(false);
 
+  useEffect(() => {
+    console.log("Updated todos:", todos);
+  }, [todos]);
+
   const addTodo = async () => {
     if (currentTodo.trim() !== "") {
       try {
@@ -99,7 +103,7 @@ function Todo() {
       >
         Open
       </Button>
-      <Box mx="auto">
+      <div>
         <BackgroundImage
           src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80"
           radius="xs"
@@ -126,44 +130,44 @@ function Todo() {
             </div>
           </Center>
         </BackgroundImage>
-      </Box>
 
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            <span>{todo}</span>
-            <Button
-              compact
-              variant="gradient"
-              gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
-              style={{ marginRight: "20px" }}
-              rightIcon={<IconTrash />}
-              onClick={() => deleteTodo(index)}
-            >
-              Delete
-            </Button>
-            <Button
-              compact
-              variant="gradient"
-              gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
-              rightIcon={<IconEdit />}
-              onClick={() => editTodo(index, prompt("Edit:", todo))}
-            >
-              Edit
-            </Button>
-          </li>
-        ))}
-      </ul>
-      <Modal
-        opened={deleteModalOpened}
-        onClose={() => setDeleteModalOpened(false)}
-        title="Modal"
-      >
-        <Group>
-          <Button onClick={() => deleteTodo(deleteIndex)}>Delete</Button>
-          <Button onClick={() => setDeleteModalOpened(false)}>Cancel</Button>
-        </Group>
-      </Modal>
+        <ul>
+          {todos.map((todo, index) => (
+            <li key={index}>
+              <span>{todo}</span>
+              <Button
+                compact
+                variant="gradient"
+                gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
+                style={{ marginRight: "20px" }}
+                rightIcon={<IconTrash />}
+                onClick={() => deleteTodo(index)}
+              >
+                Delete
+              </Button>
+              <Button
+                compact
+                variant="gradient"
+                gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
+                rightIcon={<IconEdit />}
+                onClick={() => editTodo(index, prompt("Edit:", todo))}
+              >
+                Edit
+              </Button>
+            </li>
+          ))}
+        </ul>
+        <Modal
+          opened={deleteModalOpened}
+          onClose={() => setDeleteModalOpened(false)}
+          title="Modal"
+        >
+          <Group>
+            <Button onClick={() => deleteTodo(deleteIndex)}>Delete</Button>
+            <Button onClick={() => setDeleteModalOpened(false)}>Cancel</Button>
+          </Group>
+        </Modal>
+      </div>
     </div>
   );
 }

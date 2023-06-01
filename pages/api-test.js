@@ -1,8 +1,4 @@
-import React, { use, useEffect, useState } from "react";
-import { Button, Modal, Group } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { IconTrash, IconEdit, IconExposurePlus1 } from "@tabler/icons-react";
-import { BackgroundImage, Center, Box } from "@mantine/core";
+import React, { useEffect, useState } from "react";
 
 function Test() {
   const [todos, setTodos] = useState([5, 2]);

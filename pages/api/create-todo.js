@@ -13,7 +13,6 @@ export default async function handler(req, res) {
     const db = client.db("My_first_db");
     const todos = db.collection("Todos");
 
-    const newTodo = { title };
     const result = await todos.insertOne({ title });
 
     res.status(200).json(result.ops[0]);
