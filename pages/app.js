@@ -1,3 +1,4 @@
+import "./App.css";
 import Todo from "./Todo";
 import { MantineProvider } from "@mantine/core";
 
@@ -12,4 +13,3 @@ function App() {
 }
 
 export default App;
-

@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 
 const uri =
-  "mongodb+srv://salkanovich:9A_S_u5%40MNFMc8f@cluster0.qktmew4.mongodb.net/";
+  "mongodb+srv://salkanovich:9A_S_u5%40MNFMc8f@cluster0.qktmew4.mongodb.net:27017/";
 
 // Replace with your MongoDB connection string
 

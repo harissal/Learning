@@ -59,6 +59,7 @@ function Todo() {
       } else {
         const error = await response.json();
         console.error("Error:", error);
+        alert("Failed to delete todo");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -85,6 +86,7 @@ function Todo() {
       } else {
         const error = await response.json();
         console.error("Error:", error);
+        alert("Failed to update todo");
       }
     } catch (error) {
       console.error("Error:", error);
